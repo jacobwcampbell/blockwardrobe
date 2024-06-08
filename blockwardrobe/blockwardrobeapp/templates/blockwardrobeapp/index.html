@@ -4,33 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Block Wardrobe</title>
-
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to Block Wardrobe!</h1>
-    <h2>Take a look at our user-created minecraft skins!</h2>
-    <ul>
-        {% for skin in all_skins %}
-            <li>
-                Name: {{ skin.name }}
-                <br>
-                Desc: {{ skin.description }}
-                <br>
-                Owner: {{ skin.owner.username }}
-                <br>
-                Skin: <img src="{{ skin.image.url }}">
-            </li>
-        {% endfor %}
-    </ul>
-    {% load static %}
-    <script type="importmap">
-        {
-          "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@v0.165.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.165.0/examples/jsm/"
-          }
-        }
-    </script>
-    <script src="{% static 'blockwardrobeapp/main.js' %}" type="module"></script>
+    <header>
+        <h1>Welcome to Block Wardrobe!</h1>
+    </header>
+    <main>
+        <h2>Take a look at our user-created minecraft skins!</h2>
+        <ul>
+            {% for skin in all_skins %}
+                <li>
+                    Name: {{ skin.name }}
+                    <br>
+                    Desc: {{ skin.description }}
+                    <br>
+                    Owner: {{ skin.owner.username }}
+                    <br>
+                    Skin: <img src="{{ skin.image.url }}">
+                    <br>
+                    <a href="{% url 'blockwardrobeapp:skin' skin.id %}">View Here</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer>
+        <p>© 2024 Block Wardrobe</p>
+    </footer>
 </body>
 </html>

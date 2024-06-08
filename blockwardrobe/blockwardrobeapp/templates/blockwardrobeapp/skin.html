@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Detail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Skin Detail</h1>
+    </header>
+
+    <main>
+        <h2>{{ skin.name }}</h2>
+        <p>{{ skin.description }}</p>
+        <p>Owner: {{ skin.owner.username }}</p>
+        <img src="{{ skin.image.url }}" alt="Skin Image">
+        <a href="{% url 'blockwardrobeapp:index' %}">Back to Skin List</a>
+    </main>
+
+    <footer>
+        <p>© 2024 Block Wardrobe</p>
+    </footer>
+</body>
+</html>
