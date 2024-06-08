@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('blockwardrobeapp/', include('blockwardrobeapp.urls')),
+    path('', include('blockwardrobeapp.urls')),
     path('admin/', admin.site.urls),
 ]
 

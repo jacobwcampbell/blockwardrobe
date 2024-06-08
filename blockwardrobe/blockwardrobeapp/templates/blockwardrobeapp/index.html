@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Wardrobe</title>
+</head>
+<body>
+    <h1>Welcome to Block Wardrobe!</h1>
+    <h2>Take a look at our user-created minecraft skins!</h2>
+    <ul>
+        {% for skin in all_skins %}
+            <li>
+                Name: {{ skin.name }}
+                <br>
+                Desc: {{ skin.description }}
+                <br>
+                Owner: {{ skin.owner.username }}
+                <br>
+                Skin: <img src="{{ skin.image.url }}">
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
