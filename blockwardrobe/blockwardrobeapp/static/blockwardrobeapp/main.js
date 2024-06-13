@@ -12,7 +12,9 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
+
 const controls = new OrbitControls( camera, renderer.domElement);
+
 controls.autoRotate = true;
 controls.autoRotateSpeed = 10.0;
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -21,9 +23,18 @@ const cube = new THREE.Mesh( geometry, material );
 const clock = new THREE.Clock(true);
 const light = new THREE.AmbientLight( 0x404040, 10 ); // soft white light
 scene.add( light );
-
 loader.load('/static/blockwardrobeapp/model.gltf', function(gltf) {
-    const mesh = gltf.scene;
+    //const textureLoader = new THREE.TextureLoader();
+    //let newTexture = textureLoader.load('/media/skins/default.png');
+    let mesh = gltf.scene;
+    mesh.traverse(function(node) {
+        console.log("Traverse");
+        if(node.isMesh) {
+            console.log(node);            
+            //node.material.map = newTexture;
+            //node.material.needsUpdate = true;
+        }
+    });
     scene.add(mesh);
     console.log("Added");
 }, undefined, function (error) {
@@ -33,6 +44,7 @@ loader.load('/static/blockwardrobeapp/model.gltf', function(gltf) {
 camera.position.z = 100;
 
 controls.update();
+console.log(document.getElementById('data').textContent);
 function animate() {
     requestAnimationFrame(animate);
     let t = clock.getDelta();
