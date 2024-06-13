@@ -8,9 +8,9 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 const renderer = new THREE.WebGLRenderer();
 const loader = new GLTFLoader();
 
-renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setSize( window.innerWidth/3, window.innerHeight/3 );
 renderer.setAnimationLoop( animate );
-document.body.appendChild( renderer.domElement );
+document.getElementById('3dcanvas').appendChild(renderer.domElement);
 
 
 const controls = new OrbitControls( camera, renderer.domElement);
@@ -24,15 +24,17 @@ const clock = new THREE.Clock(true);
 const light = new THREE.AmbientLight( 0x404040, 10 ); // soft white light
 scene.add( light );
 loader.load('/static/blockwardrobeapp/model.gltf', function(gltf) {
-    //const textureLoader = new THREE.TextureLoader();
-    //let newTexture = textureLoader.load('/media/skins/default.png');
+    const textureLoader = new THREE.TextureLoader();
+    let newTexture = textureLoader.load('/media/skins/default.png');
+    newTexture.magFilter = THREE.NearestFilter;
+    newTexture.flipY = false;
     let mesh = gltf.scene;
     mesh.traverse(function(node) {
         console.log("Traverse");
         if(node.isMesh) {
             console.log(node);            
-            //node.material.map = newTexture;
-            //node.material.needsUpdate = true;
+            node.material.map = newTexture;
+            node.material.needsUpdate = true;
         }
     });
     scene.add(mesh);
